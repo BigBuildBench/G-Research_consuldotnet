@@ -1,0 +1,104 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+/*banner*/
+
+.heroBackground {
+    background: linear-gradient(90deg, #00458d 0%, #00356d 100%);
+    color: white;
+}
+
+.heroWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logoSvgBox {
+    width: 380px;
+    overflow: clip;
+}
+
+@media screen and (max-width: 996px) {
+    .logoSvgBox {
+        width: 100%;
+    }
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.badges {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 1rem;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.badge {
+    margin: 0 0.5rem;
+}
+
+.previewLink {
+    color: #92c7ff;
+}
+
+.previewLink:hover {
+    color: #49a2ff;
+}
+
+.indexCtasGitHubButtonWrapper {
+    display: flex;
+}
+
+.indexCtasGitHubButton {
+    overflow: hidden;
+}
+
+/*banner*/
+
+
+/*features*/
+.features {
+    display: flex;
+    align-items: center;
+    padding: 2rem 0;
+    width: 100%;
+}
+
+.featureIcon {
+    height: 200px;
+    width: 200px;
+}
+
+/*features*/
+
+
+/*compatibilities*/
+.markdownWrapper table {
+    border-collapse: separate;
+}
+
+.markdownWrapper table th:nth-child(1), .markdownWrapper table th:nth-child(4) {
+    width: 10%;
+}
+
+.markdownWrapper table th:nth-child(2), .markdownWrapper table th:nth-child(3) {
+    width: 30%;
+}
+
+td:first-child:not(:empty) {
+    color: var(--ifm-table-head-color);
+    font-weight: var(--ifm-table-head-font-weight);
+}
+
+/*compatibilities*/

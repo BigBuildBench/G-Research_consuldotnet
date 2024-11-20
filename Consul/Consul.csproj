@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <Authors>PlayFab,$(Authors)</Authors>
+    <Copyright>Copyright 2015-2018 PlayFab Inc.; $(Copyright)</Copyright>
+    <Description>Consul.NET is a .NET client library for the Consul HTTP API</Description>
+    <PackageOutputPath>../dist/consul</PackageOutputPath>
+    <AssemblyTitle>Consul.NET</AssemblyTitle>
+    <AssemblyProduct>Consul.NET</AssemblyProduct>
+  </PropertyGroup>
+
+  <Target Name="ILRepack" AfterTargets="AfterBuild" Condition=" '$(TargetFrameworkIdentifier)' == '.NETFramework' ">
+    <ItemGroup>
+      <ArtifactsToMerge Include="Newtonsoft.Json.dll" />
+    </ItemGroup>
+    <PropertyGroup>
+      <ILRepackCommand>$(ILRepack) /parallel /internalize /out:ILRepack/$(AssemblyName).dll</ILRepackCommand>
+      <ILRepackCommand>$(ILRepackCommand) /keyfile:$([System.IO.Path]::GetFullPath('$(AssemblyOriginatorKeyFile)'))</ILRepackCommand>
+      <ILRepackCommand>$(ILRepackCommand) $(AssemblyName).dll @(ArtifactsToMerge->'%(filename)%(extension)', ' ')</ILRepackCommand>
+      <ILRepackCommand Condition=" '$(OS)' != 'Windows_NT' ">mono $(ILRepackCommand)</ILRepackCommand>
+    </PropertyGroup>
+    <MakeDir Directories="$(OutputPath)/ILRepack" />
+    <Exec WorkingDirectory="$(OutputPath)" Command="$(ILRepackCommand)" ContinueOnError="false" StandardOutputImportance="normal" />
+    <Move SourceFiles="$(OutputPath)ILRepack/$(AssemblyName).dll" DestinationFiles="$(OutputPath)$(AssemblyName).dll" OverwriteReadOnlyFiles="true" />
+    <RemoveDir Directories="$(OutputPath)ILRepack" />
+    <Message Importance="high" Text="Merged @(ArtifactsToMerge->'%(filename)%(extension)', ', ') into $(OutputPath)$(AssemblyName).dll" />
+  </Target>
+
+</Project>
